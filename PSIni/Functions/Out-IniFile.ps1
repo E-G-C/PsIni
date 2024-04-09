@@ -190,7 +190,7 @@ Function Out-IniFile {
 
         Write-Verbose "$($MyInvocation.MyCommand.Name):: Writing to file: $Filepath"
         foreach ($i in $InputObject.get_keys()) {
-            if (!($InputObject[$i].GetType().GetInterface('IDictionary'))) {
+            if ($null -ne $InputObject[$i] -and !($InputObject[$i].GetType().GetInterface('IDictionary'))) {
                 #Key value pair
                 Write-Verbose "$($MyInvocation.MyCommand.Name):: Writing key: $i"
                 "$i$delimiter$($InputObject[$i])" | Out-File -Append @parameters
